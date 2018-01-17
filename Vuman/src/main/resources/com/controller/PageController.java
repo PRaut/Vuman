@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class indexController {
-
-	@RequestMapping(value="/")
-	public String indexController(){
-		return "index";
+public class PageController {
+	
+	@RequestMapping(value={ "/index", "/home"})
+	public ModelAndView index(){
+		ModelAndView mv = new ModelAndView("index");
+		return mv;
 	}
 }
