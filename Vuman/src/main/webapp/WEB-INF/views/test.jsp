@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>test jsp</title>
+<title>I m test</title>
 </head>
 <body>
-	${"greeting"}
+	this is test.jsp
 </body>
 </html>
