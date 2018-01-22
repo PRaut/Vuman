@@ -12,10 +12,18 @@
 		<javaee.version>7.0</javaee.version>
 		<spring.version>5.0.2.RELEASE</spring.version>
 		<servlet.version>4.0.0</servlet.version>
+		<hibernate.version>5.2.12.Final</hibernate.version>
 	</properties>
 
 
 	<dependencies>
+		<!-- LINKING BACKEND PROJECT -->
+		<dependency>
+			<groupId>com</groupId>
+			<artifactId>VumanBackend</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 		<!-- junit -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -71,6 +79,13 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- HIBERNATE -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
 		</dependency>
 	</dependencies>
 

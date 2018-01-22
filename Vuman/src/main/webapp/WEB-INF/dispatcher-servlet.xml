@@ -3,6 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:pojo="http://www.springframework.org/schema/pojo"
 	xsi:schemaLocation="
      http://www.springframework.org/schema/beans
      http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -13,8 +14,11 @@
 
 	<context:component-scan base-package="com.controller" />
 	<context:annotation-config></context:annotation-config>
-	<mvc:annotation-driven /> <!-- use this so that annotations like requestmapping work -->
+	
+	<mvc:annotation-driven ></mvc:annotation-driven>
 	<mvc:default-servlet-handler />
+	<mvc:resources location="/resources/" mapping="/resources/**" />
+	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
