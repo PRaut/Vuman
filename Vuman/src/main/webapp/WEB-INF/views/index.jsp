@@ -1,17 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" isELIgnored="false" autoFlush="true" %>
+	pageEncoding="ISO-8859-1" isELIgnored="false" %>
+	
+<%@ prefix="c" taglib="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Vuman</title>
-<base href="/resources/">
-<link href="/css/stylesheet.css" rel="stylesheet" type="text/css"></link>
+<link href="/resources/css/stylesheet.css" rel="stylesheet" type="text/css"></link>
 
 </head>
 <body>
 	<!-- header start-->
-	<jsp:include page="header.html"></jsp:include>
+	<!--<jsp:include page="header.html"></jsp:include> -->
+	<!-- <%@include file="/header.html"  %> -->
 	<!-- header end -->
 
 	<!--  carousal start -->
@@ -23,7 +25,7 @@
 		<div class="row">
 			 
 			<div class="col-md-2 column productbox">
-				<img src="images/img1.jpeg" class="img-responsive prdimg">
+				<img src="/resources/images/img1.jpeg" class="img-responsive prdimg">
 				<div class="producttitle">Sarees</div>
 				<div class="productprice">
 					<div class="pull-right">
@@ -87,22 +89,6 @@
 					<div class="pricetext">£8.95</div>
 				</div>
 			</div>
-			<!-- 
-			<ul class="products">
-				<li>
-					<a href="#"> <img src="shirt-gray.png">
-						<h4>Logo Shirt (Gray)</h4>
-						<p>$20.00</p>
-					</a>
-				</li>
-				<li><a href="#"> <img src="shirt-orange.png">
-						<h4>Mike the Frog Shirt (Orange)</h4>
-						<p>$25.00</p>
-				</a></li>
-				<!-- more list items -->
-			</ul>
-			
- 			
 		</div>
 	</div>
 	<!-- 3 col product end -->
