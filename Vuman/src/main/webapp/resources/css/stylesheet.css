@@ -75,14 +75,18 @@ ul.products li {
 }*/
 
 footer nav ul{
-	float: left;
+	float: center;
 }
 
 footer ul li{
 	list-style: none;
+	display: inline;
 }
 
 footer ul li a{
 	text-decoration: none;
 	color: #fff;
+}
+footer a:hover{
+	color:red;
 }

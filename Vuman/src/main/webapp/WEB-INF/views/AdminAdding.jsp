@@ -1,13 +1,16 @@
-<%@include file="header.html" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" isELIgnored="false"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Admin Page</title>
 
-<link rel="stylesheet" type="text/css" href="./resources/css/admintabs.css">
+<link rel="stylesheet" type="text/css"
+	href="./resources/css/admintabs.css">
 <script type="text/javascript" src="./resources/js/admin_tab_js.js"></script>
 
 <link rel="stylesheet"
@@ -23,7 +26,8 @@
 
 </head>
 <body>
-	<h1>Welcome Admin</h1>
+	<%-- <%@include file="header.html" %> --%>
+	<h2>Welcome Admin</h2>
 	<div class="container">
 		<!-- Tab links -->
 		<div class="tab">
@@ -44,9 +48,33 @@
 		</div>
 
 		<div id="Category" class="tabcontent">
-			<h3>Category</h3>
-			<p>This is Category</p>
+
+			<sf:form action="addSupplier" method="post">
+				<table>
+					<tr>
+						<td><sf:label path="sid">Supplier ID:</sf:label></td>
+						<sf:input type="text" id="sid" path="sid" name="sid" />
+					</tr>
+					<tr>
+						<td><sf:label path="supplierName">Supplier Name:</sf:label> 
+						<sf:input text="text" id="supplierName" path="supplierName" />
+						</td>
+					</tr>
+					
+					<tr>
+						<td><sf:button id="register" type="submit">Register</sf:button></td>
+					</tr>
+				</table>
+
+
+
+
+
+				
+			</sf:form>
 		</div>
 	</div>
+
+	<%-- <%@include file="footer.html" %> --%>
 </body>
 </html>
