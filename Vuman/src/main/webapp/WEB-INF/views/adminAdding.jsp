@@ -1,12 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" isELIgnored="false"%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Page</title>
 
 <link rel="stylesheet" type="text/css"
@@ -29,50 +26,92 @@
 	<%-- <%@include file="header.html" %> --%>
 	<h2>Welcome Admin</h2>
 	<div class="container">
-		<!-- Tab links -->
-		<div class="tab">
-			<button class="tablinks" onclick="openCity(event, 'Supplier')">Supplier</button>
-			<button class="tablinks" onclick="openCity(event, 'Product')">Product</button>
-			<button class="tablinks" onclick="openCity(event, 'Category')">Category</button>
+
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#supplier">Supplier</a></li>
+			<li><a data-toggle="tab" href="#category">Category</a></li>
+			<li><a data-toggle="tab" href="#product">Product</a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div id="supplier" class="tab-pane fade in active">
+				<form action="/saveSupp">
+					<div class="form-group">
+						<label for="sid">Supplier ID</label> <input type="text"
+							class="form-control" id="sid" placeholder="Enter Supplier ID"
+							name="sid">
+					</div>
+					<div class="form-group">
+						<label for="supplierName">Supplier Name</label> <input type="text"
+							class="form-control" id="supplierName"
+							placeholder="Enter Supplier Name" name="supplierName">
+					</div>
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+			</div>
+			<div id="category" class="tab-pane fade">
+				<form action="/saveCat/cid">
+					<div class="form-group">
+						<label for="cid">Category ID</label> <input type="text"
+							class="form-control" id="cid" placeholder="Enter Category ID"
+							name="cid">
+					</div>
+					<div class="form-group">
+						<label for="cname">Category Name</label> <input type="text"
+							class="form-control" id="cname" placeholder="Enter Category Name"
+							name="cname">
+					</div>
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+			</div>
+			<div id="product" class="tab-pane fade">
+				<form action="/saveProd">
+					<div class="form-group">
+						<label for="pName">Product Name</label> <input type="text"
+							class="form-control" id="pName" placeholder="Enter Product Name"
+							name="pName">
+					</div>
+					<div class="form-group">
+						<label for="pDesc">Product Description</label>
+						<textarea class="form-control" id="pDesc" rows="3"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="pPrice">Price</label> <input type="text"
+							class="form-control" id="pPrice"
+							placeholder="Enter Product Price" name="pPrice">
+					</div>
+
+					<div class="form-group">
+						<label for="pStock">Stock</label> <input type="pStock"
+							class="form-control" id="pStock" placeholder="Enter Stock"
+							name="pStock">
+					</div>
+
+					<div class="form-group">
+						<label for="cid">Category ID</label> <select class="form-control"
+							id="cid" name="cid">
+							<option>cat 1</option>
+							<option>cat 2</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="sid">Supplier ID</label> <select class="form-control"
+							id="sid" name="sid">
+							<option>Supp 1</option>
+							<option>Supp 2</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="pImage">Select Product Image</label> <input
+							type="file" class="form-control-file" id="pImage">
+					</div>
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+			</div>
 		</div>
 
-		<!-- Tab content -->
-		<div id="Supplier" class="tabcontent">
-			<h3>Supplier</h3>
-			<p>This is Supplier</p>
-		</div>
-
-		<div id="Product" class="tabcontent">
-			<h3>Product</h3>
-			<p>This is Product</p>
-		</div>
-
-		<div id="Category" class="tabcontent">
-
-			<sf:form action="addSupplier" method="post">
-				<table>
-					<tr>
-						<td><sf:label path="sid">Supplier ID:</sf:label></td>
-						<sf:input type="text" id="sid" path="sid" name="sid" />
-					</tr>
-					<tr>
-						<td><sf:label path="supplierName">Supplier Name:</sf:label> 
-						<sf:input text="text" id="supplierName" path="supplierName" />
-						</td>
-					</tr>
-					
-					<tr>
-						<td><sf:button id="register" type="submit">Register</sf:button></td>
-					</tr>
-				</table>
-
-
-
-
-
-				
-			</sf:form>
-		</div>
 	</div>
 
 	<%-- <%@include file="footer.html" %> --%>

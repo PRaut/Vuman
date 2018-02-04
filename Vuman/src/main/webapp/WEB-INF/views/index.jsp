@@ -1,12 +1,12 @@
-<%@include file="header.html" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" isELIgnored="false" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@include file="header.html"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Vuman</title>
-<link href="/resources/css/stylesheet.css" rel="stylesheet" type="text/css"></link>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vuman - shopping place</title>
+<link href="/resources/css/stylesheet.css" rel="stylesheet"
+	type="text/css"></link>
 
 </head>
 <body>
@@ -18,7 +18,7 @@
 	<!-- 3 col product start   -->
 	<div class="container">
 		<div class="row">
-			 
+
 			<div class="col-md-2 column productbox">
 				<img src="/resources/images/img1.jpeg" class="img-responsive prdimg">
 				<div class="producttitle">Sarees</div>
@@ -40,7 +40,7 @@
 					<div class="pricetext">£8.95</div>
 				</div>
 			</div>
-			
+
 			<div class="col-md-2 column productbox">
 				<img src="../images/img3.jpeg" class="img-responsive prdimg">
 				<div class="producttitle">Lehenga</div>
@@ -51,7 +51,7 @@
 					<div class="pricetext">£8.95</div>
 				</div>
 			</div>
-			
+
 			<div class="col-md-2 column productbox">
 				<img src="../images/img4.jpeg" class="img-responsive prdimg">
 				<div class="producttitle">Anarkali</div>
@@ -62,8 +62,8 @@
 					<div class="pricetext">£8.95</div>
 				</div>
 			</div>
-			 
-			 <div class="col-md-2 column productbox">
+
+			<div class="col-md-2 column productbox">
 				<img src="../images/img5.jpeg" class="img-responsive prdimg">
 				<div class="producttitle">Leggis</div>
 				<div class="productprice">
@@ -73,7 +73,7 @@
 					<div class="pricetext">£8.95</div>
 				</div>
 			</div>
-			
+
 			<div class="col-md-2 column productbox">
 				<img src="../images/img6.jpeg" class="img-responsive prdimg">
 				<div class="producttitle">Blouse</div>
