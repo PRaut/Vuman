@@ -23,17 +23,18 @@ import com.model.Supplier;
 @Controller
 public class AdminController {
 
-	@Autowired
+	/*@Autowired*/
 	CategoryDaoImpl categoryDaoImpl;
 
-	@Autowired
+	//@Autowired
 	SupplierDaoImpl supplierDaoImpl;
 
-	@Autowired
+	//@Autowired
 	ProductDaoImpl productDaoImpl;
 
 	@RequestMapping(value = { "/admin" }, method = RequestMethod.GET)
 	public String adminPage() {
+		System.out.println("in adminController constructor");
 		return "adminAdding";
 	}
 
@@ -85,7 +86,7 @@ public class AdminController {
 			fos.write(imageByte);
 			fos.close();
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("SAVEPROD : "+e);
 		}
 
 		return "adminAdding";
