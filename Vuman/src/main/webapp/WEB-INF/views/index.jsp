@@ -1,7 +1,7 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" isELIgnored="false" autoFlush="false" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <spring:url  var="css" value="/resources/css"></spring:url>
-<spring:url  var="js" value="/assets/js"></spring:url>
+<spring:url  var="js" value="/resources/js"></spring:url>
 <spring:url  var="images" value="/resources/images"></spring:url>
 
 <!DOCTYPE html>
@@ -10,15 +10,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vuman - shopping place</title>
+
 <link href="${css}/stylesheet.css" rel="stylesheet" type="text/css"></link>
 </head>
 <body>
+	<jsp:include page="header.jsp"></jsp:include>
 	
-	<%--   carousal start	 --%>
-	 <jsp:include page="../views/header.html"></jsp:include>
-	<!-- carousel end -->
-
-	<!-- 3 col product start   -->
+		<!-- 3 col product start   -->
 	<div class="container">
 		<div class="row">
 
