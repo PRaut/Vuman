@@ -5,9 +5,11 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,20 +41,19 @@ public class AdminController {
 	public ModelAndView adminPage() {
 		System.out.println("in adminController constructor");
 		ModelAndView mv = new ModelAndView("adminAdding");
-		Product nProduct = new Product();
-		mv.addObject("product", nProduct);
 		return mv;
 	}
 
-	@RequestMapping(value = "/saveCategory/cid", method = RequestMethod.POST)
+	@RequestMapping(value = "/saveCategory", method = RequestMethod.POST)
 	public ModelAndView saveCategotyData(@RequestParam("cid") String cid, @RequestParam("cname") String cname) {
 		ModelAndView mv = new ModelAndView();
 		Category category = new Category();
-		//category.setCid(cid);
+		category.setCid(cid);
 		category.setCname(cname);
 
 		categoryDaoImpl.insertCategory(category);
-
+		mv.addObject("msg", "Category \'"+ cid + " - " + cname+ "\' Added Successfully");
+		System.out.println("Category "  + cname + " Added Successfully");
 		mv.setViewName("adminAdding");
 		return mv;
 	}
@@ -67,40 +68,84 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 
 		Supplier supplier = new Supplier();
-		//supplier.setSid(sid);
+		supplier.setSid(sid);
 		supplier.setSupplierName(supplierName);
-		//supplierDaoImpl = new SupplierDaoImpl(); // not supports DI
+		//supplierDaoImpl = new SupplierDaoImpl(); // not a DI
 		supplierDaoImpl.insertSupplier(supplier);
+		System.out.println("Supplier Added Successfully.");
+		mv.addObject("msg", "Supplier \'"+ sid + " - "+ supplierName  +"\' Added Successfully");
 		mv.setViewName("adminAdding");
 		return mv;
 	}
 
 	// save Product
 	@RequestMapping(value = "/saveProduct", method = RequestMethod.POST)
-	public String saveProduct(HttpServletRequest req, @RequestParam("file") MultipartFile file) {
+	public ModelAndView saveProduct( 
+			@RequestParam("pimage") MultipartFile file,
+			HttpServletRequest req) {
 
+		System.out.println("IN save Product ()");
+		
 		Product product = new Product();
 		product.setProductName(req.getParameter("pName"));
+		System.out.println("Product Name: "+req.getParameter("pName"));
+		
 		product.setProductDescription(req.getParameter("pDesc"));
+		System.out.println("Product Desc: "+req.getParameter("pDesc"));
+		
 		product.setPrice(Float.parseFloat(req.getParameter("pPrice")));
+		System.out.println("Product Price: "+req.getParameter("pPrice"));
+		
 		product.setStock(Integer.parseInt(req.getParameter("pStock")));
+		System.out.println("Product Stock: "+req.getParameter("pStock"));
 
-		String filePath = req.getSession().getServletContext().getRealPath("/");
+		
+		String filePath = req.getSession().getServletContext().getRealPath("/assets/images/");
+		System.out.println("REAL PATH: "+ filePath);
+		
 		String fileName = file.getOriginalFilename();
+		System.out.println("FILE NAME: "+ fileName);
+		
 		productDaoImpl.insertProduct(product); 
+		
+		System.out.println("CID: "+product.getCategory().getCid());
+		System.out.println("SID: "+ product.getSupplier().getSid());
+		System.out.println("Product Inserted Successful");
 
 		try {
 			byte[] imageByte = file.getBytes();
 			BufferedOutputStream fos = new BufferedOutputStream(
-					new FileOutputStream(filePath + "/resources/" + fileName));
+					new FileOutputStream(filePath + "/assets/" + fileName));
 			fos.write(imageByte);
 			fos.close();
 		} catch (Exception e) {
-			System.out.println("SAVEPROD : "+e);
+			System.out.println("Ex in SAVEPROD : "+e);
 		}
-
-		return "adminAdding";
+		
+		ModelAndView mv = new ModelAndView("adminAdding");
+		mv.addObject("msg", "Product Added Successfully");
+		return mv;
 	}
+	
+	
+	// return supplier model to admin page
+	@ModelAttribute("supplier")
+	public Supplier getSupplier(){
+		return new Supplier();
+	}
+	
+	//return product model to admin page
+	@ModelAttribute("product")
+	public Product getProduct(){
+		return new Product();
+	}
+	
+	//return category model to admin page
+	@ModelAttribute("category")
+	public Category getCategory(){
+		return new Category();
+	}
+	
 	
 	//returing all categories to Product form
 	@ModelAttribute("categories")
@@ -108,6 +153,7 @@ public class AdminController {
 		return categoryDaoImpl.getAllCategories();
 	}
 	
+	//returing all supplier to Product form
 	@ModelAttribute("suppliers")
 	public List<Supplier> getSuppliers(){
 		return supplierDaoImpl.getAllSuppliers();

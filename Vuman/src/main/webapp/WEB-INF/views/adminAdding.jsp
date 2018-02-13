@@ -1,4 +1,9 @@
 <%@taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@page language="java" isELIgnored="false"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page isELIgnored="false"  language="java"%>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}"></c:set>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,61 +22,66 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="main.js"></script>
 
-<%@page language="java" isELIgnored="false"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page isELIgnored="false"  language="java"%>
 </head>
 <body>
-<c:set var="contextRoot" value="${pageContext.request.contextPath}"></c:set>
+
 
 	<jsp:include page="adminHeader.jsp" />
 	<h2>Welcome Admin</h2>
 	<div class="container">
 
+		<c:if test="${not empty msg }">
+			<h3>${msg} </h3>
+		</c:if>
+		
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#supplier">Supplier</a></li>
 			<li><a data-toggle="tab" href="#category">Category</a></li>
 			<li><a data-toggle="tab" href="#product">Product</a></li>
 		</ul>
 
+
+
+	
 		<!-- Supplier Tab -->
 		<div class="tab-content">
 			<div id="supplier" class="tab-pane fade in active">
-				<form action="/saveSuppliper" method="post">
+				<sf:form action="${contextRoot}/admin/saveSuppliper" modelAttribute="supplier" method="post">
 					<div class="form-group">
-						<label for="sid">Supplier ID</label> <input type="text"
-							class="form-control" id="sid" placeholder="Enter Supplier ID"
-							name="sid">
+						<sf:label for="sid" path="sid">Supplier ID</sf:label> 
+						<sf:input type="text" path="sid" class="form-control" id="sid" placeholder="Enter Supplier ID"
+							name="sid" />
 					</div>
 					<div class="form-group">
-						<label for="supplierName">Supplier Name</label> <input type="text"
-							class="form-control" id="supplierName"
-							placeholder="Enter Supplier Name" name="supplierName">
+						<sf:label for="supplierName" path="supplierName">Supplier Name</sf:label>
+						<sf:input type="text" path="supplierName" class="form-control" id="supplierName"
+							placeholder="Enter Supplier Name" name="supplierName" />
 					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
-				</form>
+					<sf:button type="submit" class="btn btn-default">Submit</sf:button>
+				</sf:form>
 			</div>
 			
 			<!-- Category Tab -->
 			<div id="category" class="tab-pane fade">
-				<form action="/saveCategory/cid">
+				<sf:form action="${contextRoot}/admin/saveCategory" modelAttribute="category" method="POST">
 					<div class="form-group">
-						<label for="cid">Category ID</label> <input type="text"
-							class="form-control" id="cid" placeholder="Enter Category ID"
-							name="cid">
+						<sf:label for="cid" path="cid">Category ID</sf:label> 
+						<sf:input type="text"  path="cid" class="form-control" id="cid" placeholder="Enter Category ID"
+							name="cid" />
 					</div>
 					<div class="form-group">
-						<label for="cname">Category Name</label> <input type="text"
+						<sf:label for="cname" path="cname">Category Name</sf:label>
+						 <sf:input type="text" path="cname"
 							class="form-control" id="cname" placeholder="Enter Category Name"
-							name="cname">
+							name="cname" />
 					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
-				</form>
+					<sf:button type="submit" class="btn btn-default">Submit</sf:button>
+				</sf:form>
 			</div>
 			
 			<!-- Product Tab -->
 			<div id="product" class="tab-pane fade">
-				<sf:form action="/saveProduct" modelAttribute="product" method="POST" >
+				<sf:form action="${contextRoot}/admin/saveProduct" modelAttribute="product" method="POST" enctype="multipart/form-data" >
 					<div class="form-group">
 						<sf:label for="pName" path="productName">Product Name</sf:label> 
 						<sf:input type="text" path= "productName" class="form-control" id="pName" placeholder="Enter Product Name"
@@ -114,8 +124,8 @@
 					</div>
 
 					<div class="form-group">
-						<sf:label for="pImage" path="pimage">Select Product Image</sf:label> 
-						<sf:input type="file" class="form-control-file" id="pImage" path="pimage"></sf:input>
+						<sf:label for="file" path="pimage">Select Product Image</sf:label> 
+						<sf:input type="file" class="form-control-file" id="pimage" path="pimage" name="pimage"></sf:input>
 					</div>
 					<sf:button type="submit" class="btn btn-default">Submit</sf:button>
 				
