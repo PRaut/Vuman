@@ -14,6 +14,17 @@ public class PageController {
 		return mv;
 	}
 	
+	@RequestMapping(value={"/login"}, method=RequestMethod.GET)
+	public ModelAndView signIn(){
+		ModelAndView mv = new ModelAndView("login");
+		return mv;
+	}
+	
+	@RequestMapping(value={"/register"}, method=RequestMethod.GET)
+	public ModelAndView register(){
+		ModelAndView mv = new ModelAndView("register");
+		return mv;
+	}
 }
 
 
