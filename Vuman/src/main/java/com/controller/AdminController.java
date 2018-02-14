@@ -126,9 +126,9 @@ public class AdminController {
 		
 		
 		//SET Supplier into Product
-		System.out.println(req.getParameter("supplier"));
+		System.out.println("SELECTED SUPPLIER: "+req.getParameter("supplier"));
 		Supplier supplier = new Supplier();
-		supplier.setSid("SELECTED SUPPLIER: "+req.getParameter("supplier"));
+		supplier.setSid(req.getParameter("supplier"));
 		product.setSupplier(supplier);
 		
 		productDaoImpl.insertProduct(product); 
