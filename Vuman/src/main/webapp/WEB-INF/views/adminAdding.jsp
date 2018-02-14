@@ -106,7 +106,7 @@
 
 					<div class="form-group">
 						<label for="cid">Category ID</label> 
-						<sf:select class="form-control" path="category"
+						<sf:select class="form-control" path="category" name="category"
 							items="${categories}"
 							itemLabel="cname"
 							itemValue="cid"	
@@ -116,7 +116,7 @@
 					<div class="form-group">
 						<label for="sid">Supplier ID</label> 
 						<sf:select class="form-control" path="supplier"
-							id="sid" name="sid"
+							name="supplier"
 							items="${suppliers}"
 							itemLabel="supplierName"
 							itemValue="sid"
