@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/security
+                           http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<context:component-scan base-package="com.*" />
+
+	<security:http auto-config="true">
+		<!-- Access to only ADMIN role  -->
+		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		
+		<!-- Access to only USER and ALL USERS role -->
+		<security:intercept-url pattern="/**" access="permitAll" />
+		<security:form-login 
+			login-page="/login" 
+			username-parameter="email" 
+			login-processing-url="/login"
+			authentication-success-forward-url="/register"
+		/>
+		<security:logout />
+	</security:http>
+
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:jdbc-user-service data-source-ref="datasource"
+				users-by-username-query="SELECT email, password, enabled FROM user WHERE email=?"
+				authorities-by-username-query="SELECT email, role FROM user WHERE email=?" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+</beans>

@@ -1,12 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<spring:url  var="css" value="/resources/css"></spring:url>
+<spring:url  var="js" value="/resources/js"></spring:url>
+<spring:url  var="images" value="/resources/images"></spring:url>
+
+<c:set var="contextRoot" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css"
-	href="./resources/css/stylesheet.css" />
+	href="${css}/stylesheet.css" />
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -23,18 +30,19 @@
 </head>
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
+	
 	<div class="container">
 		<h2>Login To Your Account</h2>
-		<form action="#">
+		<form action="${contextRoot}/login" method="post">
 			<div class="form-group">
-				<label for="email">Email:</label>
+				<label for="email">Email</label>
 				<input type="email" class="form-control" id="email" placeholder ="Email"
 					name="email">
 			</div>
 			<div class="form-group">
-				<label for="pwd">Password:</label> <input type="password"
-					class="form-control" id="pwd" placeholder="Password"
-					name="pwd">
+				<label for="password">Password</label> <input type="password"
+					class="form-control" id="password" placeholder="Password"
+					name="password">
 			</div>
 			<div class="checkbox">
 				<label><input type="checkbox" name="remember">
