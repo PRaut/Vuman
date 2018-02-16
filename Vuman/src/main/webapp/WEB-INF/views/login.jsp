@@ -33,7 +33,7 @@
 	
 	<div class="container">
 		<h2>Login To Your Account</h2>
-		<form action="${contextRoot}/login" method="post">
+		<form action="${contextRoot}/test" method="post">
 			<div class="form-group">
 				<label for="email">Email</label>
 				<input type="email" class="form-control" id="email" placeholder ="Email"
@@ -48,6 +48,11 @@
 				<label><input type="checkbox" name="remember">
 					Remember me</label>
 			</div>
+			
+			<div>
+				<input name="_csrf" type="hidden" value="1fe0745f-08ff-4bf4-a897-1319dd64691d" />
+			</div>
+			
 			<button type="submit" class="btn btn-default">Submit</button>
 		</form>
 	</div>

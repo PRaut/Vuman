@@ -29,5 +29,9 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+	<bean id="multipartResolver" 
+	class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+	
+	<!-- <bean id="passwordEncoder"
+	class="org.springframework.security.crypto.NoOpPasswordEncoder" factory-method="getInstance"/>  -->
 </beans>

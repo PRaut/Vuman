@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>I m test</title>
+<title>fail</title>
 </head>
 <body>
-	this is security test.jsp
+	Auth Fail
 </body>
 </html>

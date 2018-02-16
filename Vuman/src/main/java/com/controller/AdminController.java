@@ -7,6 +7,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -159,7 +161,7 @@ public class AdminController {
 	}
 	
 	
-	//returing all categories to Product form
+	//returning all categories to Product form
 	@ModelAttribute("categories")
 	public List<Category> getCategories(){
 		return categoryDaoImpl.getAllCategories();
@@ -169,5 +171,11 @@ public class AdminController {
 	@ModelAttribute("suppliers")
 	public List<Supplier> getSuppliers(){
 		return supplierDaoImpl.getAllSuppliers();
+	}
+	
+	//  For PasswordEncoder 
+	@ModelAttribute
+	public  NoOpPasswordEncoder getInstance() {
+	    return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
 	}
 }
