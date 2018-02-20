@@ -27,9 +27,10 @@
 
 
 	<jsp:include page="adminHeader.jsp" />
-	<h2>Welcome Admin</h2>
+	
+	
 	<div class="container">
-
+		<h3>Welcome Admin</h3>
 		<c:if test="${not empty msg }">
 			<h3>${msg} </h3>
 		</c:if>
@@ -40,9 +41,6 @@
 			<li><a data-toggle="tab" href="#product">Product</a></li>
 		</ul>
 
-
-
-	
 		<!-- Supplier Tab -->
 		<div class="tab-content">
 			<div id="supplier" class="tab-pane fade in active">
@@ -130,15 +128,12 @@
 					<sf:button type="submit" class="btn btn-default">Submit</sf:button>
 				
 				<sf:hidden path="pid"/>
-				<sf:hidden path="productName"/>
-				<sf:hidden path="productDescription"/>
-				<sf:hidden path="price"/>
-				<sf:hidden path="stock"/>
+				
 				</sf:form>
 			</div>
 		</div>
-
 	</div>
 
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

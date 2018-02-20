@@ -1,17 +1,14 @@
 package com.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +21,7 @@ import com.DaoImpl.SupplierDaoImpl;
 import com.model.Category;
 import com.model.Product;
 import com.model.Supplier;
+import com.util.FileUploadUtil;
 
 @Controller
 @RequestMapping("/admin")
@@ -37,8 +35,10 @@ public class AdminController {
 
 	@Autowired
 	ProductDaoImpl productDaoImpl;
+	
+	private String ABS_PATH = "F:\\JAVA_WORKSPACE\\Vuman\\Vuman\\src\\main\\webapp\\assets\\images\\";
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping()
 	public ModelAndView adminPage() {
 		System.out.println("in adminController constructor");
 		ModelAndView mv = new ModelAndView("adminAdding");
@@ -87,19 +87,7 @@ public class AdminController {
 
 		System.out.println("IN save Product ()");
 		
-//		Product product = new Product();
-//		product.setProductName(req.getParameter("pName"));
-//		System.out.println("Product Name: "+req.getParameter("pName"));
-//		
-//		product.setProductDescription(req.getParameter("pDesc"));
-//		System.out.println("Product Desc: "+req.getParameter("pDesc"));
-//		
-//		product.setPrice(Float.parseFloat(req.getParameter("pPrice")));
-//		System.out.println("Product Price: "+req.getParameter("pPrice"));
-//		
-//		product.setStock(Integer.parseInt(req.getParameter("pStock")));
-//		System.out.println("Product Stock: "+req.getParameter("pStock"));
-
+		ModelAndView mv = new ModelAndView("adminAdding");
 		
 		String filePath = req.getSession().getServletContext().getRealPath("/");
 		System.out.println("REAL PATH: "+ filePath);
@@ -109,16 +97,8 @@ public class AdminController {
 		
 		product.setImageName(fileName);
 				
-		try {
-			byte[] imageByte = file.getBytes();
-			BufferedOutputStream fos = new BufferedOutputStream(
-					new FileOutputStream(filePath + "\\assets\\images\\" + fileName));
-			System.out.println("NEW PATH: "+ filePath + "\\asset\\images\\" + fileName);
-			fos.write(imageByte);
-			fos.close();
-		} catch (Exception e) {
-			System.out.println("Ex in SAVEPROD : "+e);
-		}
+		// File upload
+		FileUploadUtil.uploadFile(file,ABS_PATH, filePath, fileName);
 		
 		// SET Category into Product
 		System.out.println("SELECTED CATEGORY: "+ req.getParameter("category"));
@@ -133,14 +113,62 @@ public class AdminController {
 		supplier.setSid(req.getParameter("supplier"));
 		product.setSupplier(supplier);
 		
-		productDaoImpl.insertProduct(product); 
+		if(product.getPid() == 0){
+			System.out.println(product.getPid() + " in insert product block");
+			productDaoImpl.insertProduct(product);
+			mv.addObject("msg", "Product Inserted Successfully");
+			mv.addObject("product", new Product());
+			System.out.println("Product Inserted Successfully");
+			}else{
+				product.setPid(Integer.parseInt(req.getParameter("pid")));
+				System.out.println(product.getPid() + " in update product block "+ req.getParameter("pid"));
+			productDaoImpl.updateProduct(product);
+			mv.addObject("msg", "Product Updated Successfully");
+			System.out.println("Product Updated Successfully");
+		}
+						
 		
-		ModelAndView mv = new ModelAndView("adminAdding");
-		mv.addObject("msg", "Product Added Successfully");
-		System.out.println("Product Inserted Successful");
 		return mv;
 	}
 	
+	@RequestMapping(value={"/manageProducts"}, method= RequestMethod.GET)
+	public ModelAndView manageProducts(){
+		List<Product> productsList =  productDaoImpl.getAllProducts();
+		ModelAndView mv = new ModelAndView("adminManageProducts");
+		mv.addObject("productList", productsList);
+		return mv;
+	}
+	
+	// ######################### Product operation ###############
+	
+	@RequestMapping(value="/deleteProduct/{pid}")
+	public ModelAndView deleteProduct(@PathVariable("pid") int pid ){
+		ModelAndView mv = new ModelAndView("adminAdding");
+		Product product = productDaoImpl.getProduct(pid);
+		productDaoImpl.deleteProduct(product);
+		
+		//mv.addObject("msg","Product "+ pid + " Deleted Successfully");
+		mv.addObject("productList", productDaoImpl.getAllProducts());
+		System.out.println("In Delete Product");
+		return mv;
+	}
+	
+	@RequestMapping(value="editProduct/{pid}", method= RequestMethod.GET)
+	public ModelAndView editProduct(@PathVariable("pid") int pid){
+		ModelAndView mv = new ModelAndView("adminManageProducts");
+		
+		Product lProduct = productDaoImpl.getProduct(Integer.valueOf(pid));
+		mv.addObject("product", lProduct);
+		mv.addObject("productList", productDaoImpl.getAllProducts());
+		
+		//mv.addObject("msg", "Manage Product");
+		
+		return mv;
+	}
+	
+	
+	
+	// ########################## BEANS required for Spring Form and Other ############## 
 	
 	// return supplier model to admin page
 	@ModelAttribute("supplier")
@@ -173,9 +201,5 @@ public class AdminController {
 		return supplierDaoImpl.getAllSuppliers();
 	}
 	
-	//  For PasswordEncoder 
-	@ModelAttribute
-	public  NoOpPasswordEncoder getInstance() {
-	    return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-	}
+
 }

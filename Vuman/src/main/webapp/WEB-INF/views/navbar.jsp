@@ -1,10 +1,12 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" autoFlush="false"
-isELIgnored="false"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" autoFlush="false" isELIgnored="false"%>
+
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <spring:url  var="css" value="/resources/css"></spring:url>
 <spring:url  var="js" value="/resources/js"></spring:url>
 <spring:url  var="images" value="/resources/images"></spring:url>
+
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}"/>
@@ -40,7 +42,7 @@ isELIgnored="false"%>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li class="active"><a href="${contextRoot}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                         
                         <li><a href="login"><span class="glyphicon glyphicon-log-in"> Signin</span></a></li>
                         
@@ -57,7 +59,8 @@ isELIgnored="false"%>
                             </ul>
                         </li>
                         
-                        <li><a href="${contextRoot}/admin"><span class="glyphicon glyphicon-log-in"> Admin</span></a></li>
+   						<li><a href="${contextRoot}/admin"><span class="glyphicon glyphicon-log-in"> Admin</span></a></li>
+   
                     </ul>
                 </div>
             </div>

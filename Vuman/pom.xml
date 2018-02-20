@@ -13,11 +13,12 @@
 		<javaee.version>7.0</javaee.version>
 		<jsp.version>2.2</jsp.version>
 		<spring.version>5.0.3.RELEASE</spring.version>
-		<spring.security.version>4.2.3.RELEASE</spring.security.version> <!-- 4.2.3.RELEASE -->
+		<!--  4.2.3.RELEASE -->
+		<spring.security.version>4.2.3.RELEASE</spring.security.version>
 		<servlet.version>3.1.0</servlet.version>
 		<hibernate.version>5.2.12.Final</hibernate.version>
 	</properties>
-
+	 
 
 	<dependencies>
 		<!-- LINKING BACKEND PROJECT -->
@@ -123,7 +124,7 @@
 			<version>${spring.security.version}</version>
 		</dependency>
 		
-		<!--  BOM Spring for 5.0.3 -->
+		<!--  BOM Spring for 5.0.3 with 5.0.1 security-->
 		<dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-framework-bom</artifactId>

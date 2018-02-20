@@ -1,9 +1,15 @@
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	isELIgnored="false" autoFlush="false"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<spring:url var="css" value="/resources/css"></spring:url>
+<spring:url var="js" value="/resources/js"></spring:url>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="../css/stylesheet.css" rel="stylesheet" type="text/css"></link>
+<link href="${css}/stylesheet.css" rel="stylesheet" type="text/css"></link>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 

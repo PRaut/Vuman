@@ -1,54 +1,42 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:security="http://www.springframework.org/schema/security"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-                           http://www.springframework.org/schema/beans/spring-beans.xsd
-                           http://www.springframework.org/schema/context
-                           http://www.springframework.org/schema/context/spring-context.xsd
-                           http://www.springframework.org/schema/security
-                           http://www.springframework.org/schema/security/spring-security.xsd">
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd">
 
-	<context:component-scan base-package="com.*" /> <!-- Required for Backend scan -->
-	
-	<!-- PASSWORD ENCODER BEAN -->
-	<!-- <bean name="bcryptEncoder"
-	class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/> -->
-	
-	<security:http auto-config="true" use-expressions="true">
-		<!-- Access to only ADMIN role  -->
-		<security:intercept-url pattern="/admin**" access="hasRole('ADMIN')" />
-		
-		<!-- Access to only USER and ALL USERS role -->
-		<security:intercept-url pattern="/**" access="permitAll"/>
-		<security:form-login 
-			login-page="/login" 
-			username-parameter="email"
-			password-parameter="password"
-			login-processing-url="/success"
-			always-use-default-target="false"
-			authentication-success-forward-url="/test"
-			authentication-failure-forward-url="/fail"
-		/>
-		
-		<!-- default CSRF disabled -->
-		<security:csrf disabled="true"/> 
-		
-		<security:logout />
-	</security:http>
-	
-	
 
-	<security:authentication-manager>
-		<security:authentication-provider>
+	<context:component-scan base-package="com" />
+	<http pattern="/resources/**" security="none" />
+
+
+	<http>
+		<!-- Access to only admin -->
+		<intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')" />
+		<!-- Access to only registered users -->
+		<intercept-url pattern="/**" access="hasAuthority('ROLE_USER')" />
+		<!-- Access to all -->
+		<intercept-url pattern="/**" access="permitAll" />
 		
-		<!-- PASSWORD ENCODER BEAN REF-->
-			<!-- <security:password-encoder ref="bcryptEncoder"/> -->
+		<form-login login-page="/login" />
+        <access-denied-handler error-page="/fail"/>
+        
+        <csrf disabled="true"/>
+        
+        <logout logout-url="/logout" invalidate-session="true"/>
 		
-			<security:jdbc-user-service data-source-ref="datasource"
-				users-by-username-query="SELECT email, password, enabled FROM user WHERE email=?"
-				authorities-by-username-query="SELECT email, role FROM user WHERE email=?" />
-		</security:authentication-provider>
-	</security:authentication-manager>
-</beans>
+	</http>
+	<authentication-manager>
+		<authentication-provider>
+			<jdbc-user-service data-source-ref="datasource"
+				users-by-username-query="select email,password,'TRUE' as enabled from user where email=?"
+				authorities-by-username-query="select email,role from user where email=?" />
+
+		</authentication-provider>
+	</authentication-manager>
+
+</beans:beans>

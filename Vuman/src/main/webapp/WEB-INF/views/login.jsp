@@ -12,8 +12,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css"
-	href="${css}/stylesheet.css" />
+<link rel="stylesheet" type="text/css" href="${css}/stylesheet.css" />
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -32,17 +31,33 @@
 	<jsp:include page="navbar.jsp"></jsp:include>
 	
 	<div class="container">
+		
+		<div class="col-xs-12">
+			<c:if test="${not empty msg}">
+			<h4 class="alert alert-success">${msg}</h4>
+			</c:if>
+		</div>
+		
 		<h2>Login To Your Account</h2>
-		<form action="${contextRoot}/test" method="post">
+		<form action="<c:url value="login"></c:url>" method="post">
+		
+		<c:if test="${not empty error }">
+			<div class="error" style="color: '#FF0000'">${error}</div>
+		</c:if>
+		
+		<c:if test="${not empty logout}">
+			<div class="error" style="color:'#FF0000'">${logout}</div>
+		</c:if> 
+		
 			<div class="form-group">
-				<label for="email">Email</label>
-				<input type="email" class="form-control" id="email" placeholder ="Email"
-					name="email">
+				<label for="username">Email</label>
+				<input type="text" class="form-control" id="username" placeholder ="Email"
+					name="username" >
 			</div>
 			<div class="form-group">
 				<label for="password">Password</label> <input type="password"
 					class="form-control" id="password" placeholder="Password"
-					name="password">
+					name="password" >
 			</div>
 			<div class="checkbox">
 				<label><input type="checkbox" name="remember">
@@ -50,7 +65,7 @@
 			</div>
 			
 			<div>
-				<input name="_csrf" type="hidden" value="1fe0745f-08ff-4bf4-a897-1319dd64691d" />
+				<input name="_csrf.parameterName" type="hidden" value="_csrf.token" />
 			</div>
 			
 			<button type="submit" class="btn btn-default">Submit</button>
