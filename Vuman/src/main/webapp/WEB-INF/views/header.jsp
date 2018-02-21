@@ -44,7 +44,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#"><span
+					<li class="active"><a href="${contextRoot}/index"><span
 							class="glyphicon glyphicon-home"></span> Home</a></li>
 
 					<li><a href="login"><span
@@ -60,23 +60,29 @@
 					</a>
 
 						<ul class="dropdown-menu">
-							 <li><a href="#">Jeans</a></li>
-							<li><a href="#"> Shirt</a></li>
-							<li><a href="#">Shoes</a></li> 
+
+							<c:if test="${ not empty catList }">
+								<li><a
+									href="${contextRoot}/product/all">All Products</a></li>
+								<c:forEach var="cat" items="${catList}">
+									<li><a href="${contextRoot}/product/${cat.cid}"> <c:out
+												value="${cat.cname}" /></a></li>
+								</c:forEach>
+							</c:if>
+
 						</ul>
 					<li><a href="${contextRoot}/admin"><span
 							class="glyphicon glyphicon-log-in"> Admin</span></a></li>
 
-					<c:if test="${pageContext.request.userPrincipal.name != null}">
-						<c:out
-							value="${SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString()}"></c:out>
-						<h6 style="color: white;" align="right">
-							Welcome : ${pageContext.request.userPrincipal.name} <a
-								href="<c:url value="/logout" />">Logout</a>
-
-						</h6>
-					</c:if>
-
+					<li><c:if
+							test="${pageContext.request.userPrincipal.name != null}">
+							<c:out
+								value="${SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString()}"></c:out>
+							<h6 style="color: white;" align="right">
+								Welcome : ${pageContext.request.userPrincipal.name} <a
+									href="<c:url value="/logout" />">Logout</a>
+							</h6>
+						</c:if></li>
 				</ul>
 			</div>
 		</div>
@@ -94,17 +100,17 @@
 			<!-- Wrapper for slides -->
 			<div class="carousel-inner">
 				<div class="item active">
-					<img src="https://www.w3schools.com/bootstrap/ny.jpg"
+					<img src="${images}/banner-1.jpg"
 						alt="New York" style="width: 100%;" />
 				</div>
 
 				<div class="item">
-					<img src="https://www.w3schools.com/bootstrap/chicago.jpg"
+					<img src="${images}/banner-2.jpg"
 						alt="New York" style="width: 100%;" />
 				</div>
 
 				<div class="item">
-					<img src="https://www.w3schools.com/bootstrap/la.jpg"
+					<img src="${images}/banner-3.jpg"
 						alt="Los Angeles" style="width: 100%;" />
 				</div>
 			</div>
