@@ -46,19 +46,6 @@
 				<li><a href="${contextRoot}/admin/manageProducts"> Manage
 						Products </a></li>
 
-				<!-- <li><a href="#"><span class="glyphicon glyphicon-user">
-							Register</span></a></li>
- -->
-				<!-- <li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Category<span class="caret"></span>
-				</a> -->
-
-				<!-- <ul class="dropdown-menu">
-						<li><a href="#">Jeans</a></li>
-						<li><a href="#"> Shirt</a></li>
-						<li><a href="#">Shoes</a></li>
-					</ul></li> -->
-
 				<li><a href="${contextRoot}/admin"><span
 						class="glyphicon glyphicon-log-in"> Admin</span></a></li>
 

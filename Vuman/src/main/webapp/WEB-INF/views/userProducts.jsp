@@ -12,13 +12,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="${css}/stylesheet.css" />
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -41,32 +41,37 @@
 	<jsp:include page="navbar.jsp"></jsp:include>
 
 	<div class="container">
+		<c:if test="${not empty msg }">
+			<div class="col-xs-12 col-md-8 alert-danger">
+				${msg}
+			</div>
+		</c:if>
+	
 		<c:if test="${not empty productList}">
 			<c:forEach var="product" items="${productList}">
-				<div class="row">
-					<div class="col-md-4 column productbox">
-						<div class="col-sm-6 col-xs-12">
-							<img alt="${product.imageName}"
-								class="userproduct img-responsive product"
-								src="${contextRoot}/resources/images/${product.imageName}" />
+				<div class="col-md-4 col-sm-6 col-xs-12">
+							<div class="col-xs-12 productbox">
+								<img alt="${product.imageName}" class="img-responsive prdimg"
+									src="${contextRoot}/resources/images/${product.imageName}" />
 
-							<div class="producttitle">${product.productName}</div>
-							<div class="productprice">
-								<div class="pull-right">
-									<a href="productById/${product.pid}"
-										class="btn btn-danger btn-sm" role="button">BUY</a>
+								<div class="producttitle">${product.productName}</div>
+								<div class="productprice">
+									<div class="pull-right">
+										<a href="productById/${product.pid}"
+											class="btn btn-sm" role="button"><span class="glyphicon glyphicon-eye-open"></span></a>
+									</div>
+									<div class="pricetext">&#8377; ${product.price}</div>
 								</div>
-								<div class="pricetext">&#8377; ${product.price}</div>
 							</div>
 						</div>
-
-					</div>
-				</div>
 			</c:forEach>
 		</c:if>
-
+		<br/>
 	</div>
-
-	<jsp:include page="footer.jsp" />
+	<br/>
+	<br/>
+	<br/>
+	
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

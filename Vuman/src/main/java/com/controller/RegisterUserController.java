@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.DaoImpl.CategoryDaoImpl;
 import com.DaoImpl.UserDaoImpl;
 import com.model.User;
 
@@ -16,10 +17,14 @@ public class RegisterUserController {
 	@Autowired
 	UserDaoImpl userDaoImpl;
 	
+	@Autowired
+	CategoryDaoImpl categoryDaoImpl;
+	
 	@RequestMapping(value={"/register"}, method=RequestMethod.GET)
 	public ModelAndView register(){
 		ModelAndView mv = new ModelAndView("register");
 		mv.addObject("user", new User());
+		mv.addObject("catList", categoryDaoImpl.getAllCategories());
 		return mv;
 	}
 	
@@ -32,6 +37,7 @@ public class RegisterUserController {
 		
 		userDaoImpl.insertUser(user);
 		mv.addObject("msg", "You are successfully registered.");
+		mv.addObject("catList", categoryDaoImpl.getAllCategories());
 		return mv;
 	}
 	

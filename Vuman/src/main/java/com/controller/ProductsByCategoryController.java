@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.DaoImpl.CategoryDaoImpl;
 import com.DaoImpl.ProductDaoImpl;
 
 @Controller
@@ -15,6 +16,9 @@ public class ProductsByCategoryController {
 
 	@Autowired
 	ProductDaoImpl productDaoImpl;
+	
+	@Autowired
+	CategoryDaoImpl categoryDaoImpl;
 
 	@RequestMapping(value = "/{cid}", method = RequestMethod.GET)
 	public ModelAndView showProductsByCategory(@PathVariable("cid") String cid) {
@@ -26,6 +30,7 @@ public class ProductsByCategoryController {
 			mv.addObject("productList", productDaoImpl.getAllProducts());
 		}
 		
+		mv.addObject("catList", categoryDaoImpl.getAllCategories());
 		return mv;
 	}
 	
@@ -33,6 +38,7 @@ public class ProductsByCategoryController {
 	public ModelAndView showAllProducts() {
 		ModelAndView mv = new ModelAndView("userProducts");
 		mv.addObject("productList", productDaoImpl.getAllProducts());
+		mv.addObject("catList", categoryDaoImpl.getAllCategories());
 		return mv;
 	}
 	
@@ -41,6 +47,7 @@ public class ProductsByCategoryController {
 		System.out.println("PID: "+pid);
 		 ModelAndView mv = new ModelAndView("singleProduct");
 		 mv.addObject("product", productDaoImpl.getProduct(pid));
+		 mv.addObject("catList", categoryDaoImpl.getAllCategories());
 		return mv;
 		
 	}

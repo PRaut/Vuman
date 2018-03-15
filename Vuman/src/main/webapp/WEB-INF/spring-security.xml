@@ -15,25 +15,30 @@
 
 
 	<http>
+		
 		<!-- Access to only admin -->
 		<intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')" />
+		
+		
 		<!-- Access to only registered users -->
 		<intercept-url pattern="/**" access="hasAuthority('ROLE_USER')" />
 		<!-- Access to all -->
 		<intercept-url pattern="/**" access="permitAll" />
-		
-		<form-login login-page="/login" />
-        <access-denied-handler error-page="/fail"/>
-        
-        <csrf disabled="true"/>
-        
-        <logout logout-url="/logout" invalidate-session="true"/>
-		
+
+		<form-login login-page="/login" 
+			authentication-failure-forward-url="/fail"
+		/>
+		<access-denied-handler error-page="/fail" />
+
+		<csrf disabled="true" />
+
+		<logout logout-url="/logout" invalidate-session="true" />
+
 	</http>
 	<authentication-manager>
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="datasource"
-				users-by-username-query="select email,password,'TRUE' as enabled from user where email=?"
+				users-by-username-query="select email,password,enabled from user where email=?"
 				authorities-by-username-query="select email,role from user where email=?" />
 
 		</authentication-provider>

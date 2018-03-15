@@ -105,7 +105,7 @@
 				<label for="cid">Category ID</label>
 				<sf:select class="form-control" path="category" name="category"
 					items="${categories}" itemLabel="cname" itemValue="cid"/>
-					<c:out value="${product.category.cid}" />
+				 />
 			</div>
 
 			<div class="form-group">
@@ -113,7 +113,7 @@
 				<sf:select class="form-control" path="supplier" name="supplier"
 					items="${suppliers}" itemLabel="supplierName" itemValue="sid"
 					 value="${product.supplier.sid}" />
-					<c:out value="${product.supplier.sid}"/>
+					
 			</div>
 
 			<div class="form-group">
@@ -124,7 +124,7 @@
 			<sf:button type="submit" class="btn btn-default">Submit</sf:button>
 
 			
-			<c:out value=" PID FOR UPDATE PRODUCT+${pid}"></c:out>
+			
 			
 		</sf:form>
 	</div>

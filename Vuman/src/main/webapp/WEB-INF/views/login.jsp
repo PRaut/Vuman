@@ -7,7 +7,7 @@
 <spring:url  var="images" value="/resources/images"></spring:url>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}"></c:set>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
@@ -39,7 +39,7 @@
 		</div>
 		
 		<h2>Login To Your Account</h2>
-		<form action="<c:url value="login"></c:url>" method="post">
+		<form action="${contextRoot}/login" method="post">
 		
 		<c:if test="${not empty error }">
 			<div class="error" style="color: '#FF0000'">${error}</div>
@@ -73,6 +73,8 @@
 	</div>
 
 	<!-- Footer -->
-	<jsp:include page="footer.jsp"></jsp:include>
+	<footer>
+		<jsp:include page="footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>

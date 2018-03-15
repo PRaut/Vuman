@@ -18,6 +18,16 @@
 
 /* *********** 3 col product style *************************** */
 .productbox {
+	width: 100%;
+	background-color: #ffffff;
+	padding: 10px;
+	margin-bottom: 10px;
+	-webkit-box-shadow: 0 8px 6px -6px #999;
+	-moz-box-shadow: 0 8px 6px -6px #999;
+	box-shadow: 0 8px 6px -6px #999;
+}
+
+.indexproductbox {
 	width: 300px;
 	background-color: #ffffff;
 	padding: 10px;
@@ -27,32 +37,32 @@
 	box-shadow: 0 8px 6px -6px #999;
 }
 
-img.prdimg{
-	height: 200px;
+img.prdimg {
+	height: 250px;
 	width: auto;
 }
+
 .producttitle {
-    font-weight:bold;
-	padding:5px 0 5px 0;
+	font-weight: bold;
+	padding: 5px 0 5px 0;
 }
 
 .productprice {
-	border-top:1px solid #dadada;
-	padding-top:5px;
+	border-top: 1px solid #dadada;
+	padding-top: 5px;
 }
 
 .pricetext {
-	font-weight:bold;
-	font-size:1.4em;
+	font-weight: bold;
+	font-size: 1.0em;
 }
 
-
 ul.products li {
-    width: 200px;
-    display: inline-block;
-    vertical-align: top;
-    *display: inline;
-    *zoom: 1;
+	width: 200px;
+	display: inline-block;
+	vertical-align: top;
+	*display: inline;
+	*zoom: 1;
 }
 
 /* **************** 3 col product style end ********************/
@@ -63,13 +73,25 @@ ul.products li {
 
 /* ******************* Footer style ************** */
 .footer {
+	/* position:fixed;
+	bottom: 0px;
 	background-color: #757575;
 	width: 100%;
 	margin-top: 30px;
 	margin-bottom: 0px;
 	padding-top: 15px;
 	padding-bottom: 15px;
-	font-size: 15px;
+	font-size: 15px; */
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #757575;
+	color: white;
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	
 }
 
 /*footer span a {
@@ -77,20 +99,80 @@ ul.products li {
 	text-decoration: none;
 	padding-right: 5px;
 }*/
-
-footer nav ul{
+footer nav ul {
 	float: center;
 }
 
-footer ul li{
+footer ul li {
 	list-style: none;
 	display: inline;
 }
 
-footer ul li a{
+footer ul li a {
 	text-decoration: none;
 	color: #fff;
 }
-footer a:hover{
-	color:red;
+
+footer a:hover {
+	color: red;
+}
+
+/************************* CART *************************/
+.table>tbody>tr>td, .table>tfoot>tr>td {
+	vertical-align: middle;
+}
+
+@media screen and (max-width: 600px) {
+	table#cart tbody td .form-control {
+		width: 20%;
+		display: inline !important;
+	}
+	.actions .btn {
+		width: 36%;
+		margin: 1.5em 0;
+	}
+	.actions .btn-info {
+		float: left;
+	}
+	.actions .btn-danger {
+		float: right;
+	}
+	table#cart thead {
+		display: none;
+	}
+	table#cart tbody td {
+		display: block;
+		padding: .6rem;
+		min-width: 320px;
+	}
+	table#cart tbody tr td:first-child {
+		background: #333;
+		color: #fff;
+	}
+	table#cart tbody td:before {
+		content: attr(data-th);
+		font-weight: bold;
+		display: inline-block;
+		width: 8rem;
+	}
+	table#cart tfoot td {
+		display: block;
+	}
+	table#cart tfoot td .btn {
+		display: block;
+	}
+}
+
+.cartImage {
+	width: 100px;
+	height: 100px;
+}
+
+.unavailable {
+	color: red;
+}
+
+/************************ CHECKOUT ****************************/
+.submit-button {
+	margin-top: 10px;
 }
