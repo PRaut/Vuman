@@ -40,11 +40,11 @@
 		<br />
 		<c:if test="${not empty product}">
 			<div class="row">
-					<div class="col-xs-12">
+					<div class="col-xs-12 col-sm-4">
 						<img alt="${product.productName}" class="img-responsive"
 							src="${contextRoot}/resources/images/${product.imageName}">
 					</div>
-					<div class="col-sm-8 col-xs-12">
+					<div class="col-xs-12 col-sm-6">
 						<strong>Product Name:</strong> ${product.productName }
 						<br /> 
 						
@@ -78,11 +78,11 @@
 							<br/>
 							<a href="${contextRoot}/product/all">
 							<span class="btn btn-warning"> Continue Shopping</span></a>
-							<br/>
 					</div>
 			</div>
 		</c:if>
 	</div>
+	<br/>
 	<br/>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>

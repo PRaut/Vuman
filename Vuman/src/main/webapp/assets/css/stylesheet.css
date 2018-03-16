@@ -1,6 +1,9 @@
 .body {
-	width: 100%;
-	margin: 0px;
+	/* width: 100%;
+	margin: 0px; */
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
 /* ***************** nav bar style ************ */
@@ -82,13 +85,22 @@ ul.products li {
 	padding-top: 15px;
 	padding-bottom: 15px;
 	font-size: 15px; */
-	position: fixed;
+	/* position: fixed;
 	left: 0;
 	bottom: 0;
 	width: 100%;
 	background-color: #757575;
 	color: white;
 	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 15px; */
+	
+	margin-top: auto;
+	position: left;
+	width: 100%;
+	background-color: #757575;
+	margin-top: 30px;
+	margin-bottom: 0px;
 	padding-top: 15px;
 	padding-bottom: 15px;
 	
